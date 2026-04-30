@@ -2,15 +2,25 @@
 
 {% block content %}
 
-<h2>All Skills</h2>
+<h2 class="mb-4">All Skills</h2>
 
-{% for skill in skills %}
-    <div class="card mb-3 p-3">
-        <h5>{{ skill.title }}</h5>
-        <p>{{ skill.description|truncatewords:10 }}</p>
+<div class="row">
+    {% for skill in skills %}
+        <div class="col-md-4">
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                    <h5>{{ skill.title }}</h5>
+                    <p>{{ skill.description|truncatewords:15 }}</p>
 
-        <a href="{% url 'skill_detail' skill.pk %}" class="btn btn-primary btn-sm">View</a>
-    </div>
-{% endfor %}
+                    <a href="{% url 'skill_detail' skill.pk %}" class="btn btn-primary btn-sm">
+                        View
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No skills available</p>
+    {% endfor %}
+</div>
 
 {% endblock %}

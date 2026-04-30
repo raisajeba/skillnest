@@ -12,6 +12,12 @@ class Skill(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    LEVEL_CHOICES = [
+        ('Beginner', 'Beginner'),
+        ('Intermediate', 'Intermediate'),
+        ('Advanced', 'Advanced'),
+    ]
+    skill_level = models.CharField(max_length=50, choices=LEVEL_CHOICES,default='Beginner')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

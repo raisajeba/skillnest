@@ -7,13 +7,13 @@ from .forms import SkillForm
 # home page
 def index(request):
     all_skills = Skill.objects.all().order_by('-created_at')
-    return render(request, 'core/index.html', {'skills': all_skills})
+    return render(request, 'skills/index.html', {'skills': all_skills})
 
 
 #  skill details
 def skill_detail(request, pk):
     skill = get_object_or_404(Skill, pk=pk)
-    return render(request, 'core/skill_detail.html', {'skill': skill})
+    return render(request, 'skills/detailskill.html', {'skill': skill})
 
 
 # skill add
@@ -29,7 +29,7 @@ def add_skill(request):
     else:
         form = SkillForm()
 
-    return render(request, 'core/skill_form.html', {'form': form})
+    return render(request, 'skills/skillform.html', {'form': form})
 
 
 # skill update
@@ -45,7 +45,7 @@ def update_skill(request, pk):
     else:
         form = SkillForm(instance=skill)
 
-    return render(request, 'core/skill_form.html', {'form': form})
+    return render(request, 'skills/skillform.html', {'form': form})
 
 
 # skill delete
@@ -57,4 +57,4 @@ def delete_skill(request, pk):
         skill.delete()
         return redirect('index')
 
-    return render(request, 'core/skill_confirm_delete.html', {'skill': skill})
+    return render(request, 'skills/deleteconfirm.html', {'skill': skill})
