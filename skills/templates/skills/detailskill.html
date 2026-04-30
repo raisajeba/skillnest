@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>{{ skill.title }}</h2>
+<p>{{ skill.description }}</p>
+
+<a href="{% url 'update_skill' skill.pk %}" class="btn btn-warning btn-sm">Edit</a>
+
+<form method="POST" action="{% url 'delete_skill' skill.pk %}">
+    {% csrf_token %}
+    <button class="btn btn-danger btn-sm">Delete</button>
+</form>
+
+{% endblock %}
