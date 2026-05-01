@@ -6,3 +6,7 @@ __pycache__/
 venv/
 .idea/
 .DS_Store
+media/
+*.jpg
+*.png
+*.jpeg
