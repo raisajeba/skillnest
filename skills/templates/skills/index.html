@@ -9,8 +9,15 @@
         <div class="col-md-4">
             <div class="card mb-3 shadow-sm">
                 <div class="card-body">
-                    <h5>{{ skill.title }}</h5>
+                    <h5>{{ skill.name }}</h5>
                     <p>{{ skill.description|truncatewords:15 }}</p>
+
+                    {% if skill.image.all %}
+                      <img src = "{{skill.image.first.image.url}}" class = "img-fluid mb-2" style = "height:150px; object-fit: cover;">
+                    {% endif %}
+
+                    <p class="text-muted">By: {{ skill.user.username }}</p>
+                    <p class="text-muted">Level: {{ skill.skill_level }}</p>
 
                     <a href="{% url 'skill_detail' skill.pk %}" class="btn btn-primary btn-sm">
                         View

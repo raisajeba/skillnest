@@ -4,10 +4,17 @@
 
 <h2>Add / Update Skill</h2>
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
 
+     <h5>Upload Images</h5>
+    {{ formset.management_form }}
+
+    {% for f in formset %}
+        {{ f.as_p }}
+    {% endfor %}
+    
     <button class="btn btn-success">Save</button>
 </form>
 

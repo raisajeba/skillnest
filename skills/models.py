@@ -22,6 +22,8 @@ class Skill(models.Model):
 
     def __str__(self):
         return self.name
+
+
 class SkillImage(models.Model):
     skill = models.ForeignKey(Skill, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='skill_pics/')

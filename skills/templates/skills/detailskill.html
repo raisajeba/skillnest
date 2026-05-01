@@ -2,10 +2,27 @@
 
 {% block content %}
 
-<h2>{{ skill.title }}</h2>
+<h2>{{ skill.name }}</h2>
 <p>{{ skill.description }}</p>
 
+<p><b>Category:</b> {{ skill.category }}</p>
+<p><b>Level:</b> {{ skill.skill_level }}</p>
+<p><b>Posted by:</b> {{ skill.user.username }}</p>
+
+<hr>
+
+<h5>Images:</h5>
+
+{% for image in skill.images.all %}
+    <img src="{{ image.image.url }}" width="200" class="me-2 mb-2">
+{% empty %}
+    <p>No images uploaded</p>
+{% endfor %}
+
+<br><br>
+
 <a href="{% url 'update_skill' skill.pk %}" class="btn btn-warning btn-sm">Edit</a>
+
 
 <form method="POST" action="{% url 'delete_skill' skill.pk %}">
     {% csrf_token %}

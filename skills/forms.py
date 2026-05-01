@@ -1,5 +1,6 @@
 from django import forms
-from .models import Skill
+from django.forms import inlineformset_factory
+from .models import Skill, SkillImage
 
 class SkillForm(forms.ModelForm):
     class Meta:
@@ -11,3 +12,11 @@ class SkillForm(forms.ModelForm):
             'skill_level': forms.Select(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control'}),
         }
+
+
+SkillImageFormSet = inlineformset_factory(
+    Skill,
+    SkillImage,
+    fields=['image'],
+    extra=1
+)

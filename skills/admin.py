@@ -12,4 +12,5 @@ admin.site.register(Category)
 admin.site.register(Skill,SkillAdmin)
 
 
+
 # Register your models here.
