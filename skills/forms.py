@@ -5,7 +5,7 @@ from .models import Skill, SkillImage
 class SkillForm(forms.ModelForm):
     class Meta:
         model = Skill
-        fields = ['category', 'name', 'description', 'skill_level']
+        fields = ['category', 'name', 'description']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
