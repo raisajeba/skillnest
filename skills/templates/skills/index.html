@@ -4,6 +4,26 @@
 
 <h2 class="mb-4">All Skills</h2>
 
+<form method="GET" class="mb-4">
+
+    <input type="text"
+           name="search"
+           class="form-control mb-2"
+           placeholder="Search skills...">
+
+    <!-- Category filter -->
+    <select name="category" class="form-control mb-2">
+        <option value="">All Categories</option>
+
+        {% for cat in categories %}
+            <option value="{{ cat.id }}">{{ cat.name }}</option>
+        {% endfor %}
+    </select>
+
+    <button class="btn btn-primary btn-sm">Search</button>
+
+</form>
+
 <div class="row">
     {% for skill in skills %}
         <div class="col-md-4">
@@ -12,12 +32,13 @@
                     <h5>{{ skill.name }}</h5>
                     <p>{{ skill.description|truncatewords:15 }}</p>
 
-                    {% if skill.image.all %}
-                      <img src = "{{skill.image.first.image.url}}" class = "img-fluid mb-2" style = "height:150px; object-fit: cover;">
+                    {% if skill.images.first %}
+                      <img src = "{{skill.images.first.image.url}}" class = "img-fluid mb-2" style = "height:150px; object-fit: cover;">
                     {% endif %}
 
                     <p class="text-muted">By: {{ skill.user.username }}</p>
                     <p class="text-muted">Level: {{ skill.skill_level }}</p>
+
 
                     <a href="{% url 'skill_detail' skill.pk %}" class="btn btn-primary btn-sm">
                         View
