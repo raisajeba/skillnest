@@ -1,13 +1,33 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Skill
+from .models import Skill,Category
 from .forms import SkillForm,SkillImageFormSet
 
 
 # home page
 def index(request):
-    all_skills = Skill.objects.all().order_by('-created_at')
-    return render(request, 'skills/index.html', {'skills': all_skills})
+    all_skills = Skill.objects.all()
+
+    search_query = request.GET.get('search')
+
+    category_id = request.GET.get('category')
+
+    if search_query:
+        all_skills = all_skills.filter(
+            title__icontains=search_query
+        )
+    if category_id:
+        all_skills = all_skills.filter(
+            category_id=category_id
+        )
+    all_skills = all_skills.order_by('-created_at')
+
+    categories = Category.objects.all()
+
+    return render(request,'skills/index.html', {
+        'skills': all_skills,
+        'categories': categories
+    })
 
 
 #  skill details
