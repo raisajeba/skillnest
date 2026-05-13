@@ -1,12 +1,6 @@
-db.sqlite3
-*.sqlite3
 __pycache__/
 *.pyc
 .env
 venv/
 .idea/
 .DS_Store
-media/
-*.jpg
-*.png
-*.jpeg

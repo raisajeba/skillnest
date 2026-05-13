@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card">
+
+    <h2>
+        ⭐ Rate {{ rated_user.username }}
+    </h2>
+
+    <br>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <label>
+            Rating (1 to 5)
+        </label>
+
+        {{ form.stars }}
+
+        <br>
+
+        <label>
+            Review
+        </label>
+
+        {{ form.review }}
+
+        <br><br>
+
+        <button type="submit">
+
+            Submit Rating
+
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

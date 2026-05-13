@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>⚡ Exchange Center</h2>
+
+<div style="margin:20px 0;">
+
+    <a href="#received" class="btn">
+        📥 Received
+    </a>
+
+    <a href="#sent" class="btn">
+        📤 Sent
+    </a>
+
+    <a href="{% url 'index' %}" class="btn">
+        ➕ Send Request
+    </a>
+
+</div>
+
+<hr>
+
+<!-- 📥 Inbox Section -->
+<h3 id="received">📥 Received Requests</h3>
+
+{% for req in inbox %}
+
+  <div class="card">
+
+    <p>
+      <b>{{ req.sender.username }}</b>
+      wants to learn
+      <b>{{ req.skill.name }}</b>
+    </p>
+
+    <p>Status: <b>{{ req.status }}</b></p>
+
+    {% if req.status == "pending" %}
+      <a class = "action-btn"
+         href="{% url 'request_action' req.id 'accept' %}">
+        ✅ Accept
+      </a>
+
+
+       <a class = "action-btn"
+       href="{% url 'request_action' req.id 'reject' %}">
+        ❌ Reject
+       </a>
+    {% endif %}
+
+  </div>
+
+{% empty %}
+  <p>No incoming requests</p>
+{% endfor %}
+
+<hr>
+
+<!-- 📤 Sent Section -->
+<h3 id="sent">📤 Sent Requests</h3>
+
+{% for req in sent %}
+
+  <div class="card">
+
+    <p>
+      You → <b>{{ req.receiver.username }}</b>
+    </p>
+
+    <p>
+      Skill: <b>{{ req.skill.name }}</b>
+    </p>
+
+    <p>Status: <b>{{ req.status }}</b></p>
+
+
+    {% if req.status == "pending" %}
+    <form method="POST"
+          action="{% url 'delete_request' req.id %}">
+
+        {% csrf_token %}
+
+        <button type="submit">
+            🗑 Cancel Request
+        </button>
+
+    </form>
+    {% endif %}
+
+  </div>
+
+{% empty %}
+  <p>You haven't sent any requests</p>
+{% endfor %}
+
+{% endblock %}

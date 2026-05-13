@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>
+    ⭐ Ratings Center
+</h2>
+
+<br>
+
+{% for user in users %}
+
+    <div class="card">
+
+        <h3>
+            {{ user.username }}
+        </h3>
+
+        <br>
+
+        <a
+        href="{% url 'give_rating' user.id %}"
+        class="btn">
+
+            Rate User
+
+        </a>
+
+    </div>
+
+{% endfor %}
+
+{% endblock %}
